@@ -15,7 +15,7 @@ function Project() {
 
   const getAllProject = async (searchKey) => {
     const result = await allProjectApi(searchKey);
-    setAllProject(result.data);
+    await setAllProject(result.data);
   };
 
   console.log(allProject);
