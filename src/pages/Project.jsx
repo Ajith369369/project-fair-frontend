@@ -18,7 +18,7 @@ function Project() {
     await setAllProject(result.data);
   };
 
-  console.log(allProject);
+  console.log('allProject: ', allProject)
 
   useEffect(() => {
     getAllProject(searchKey);
@@ -65,7 +65,7 @@ function Project() {
               This is useful in cases where allProject might not be immediately available (e.g., while waiting for data to load). */}
               {allProject?.length > 0 ? (
                 allProject?.map((item) => (
-                  <div key={item._id} className="col-md-4 p-4">
+                  <div key={item?._id} className="col-md-4 p-4">
                     <ProjectCard project={item} />
                   </div>
                 ))
