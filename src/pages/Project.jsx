@@ -64,7 +64,7 @@ function Project() {
               {/* allProject?.length > 0 uses optional chaining. This prevents errors if allProject is null or undefined. If allProject is not defined, allProject?.length will return undefined rather than throwing an error.
               This is useful in cases where allProject might not be immediately available (e.g., while waiting for data to load). */}
               {allProject?.length > 0 ? (
-                allProject.map((item) => (
+                allProject?.map((item) => (
                   <div key={item._id} className="col-md-4 p-4">
                     <ProjectCard project={item} />
                   </div>
