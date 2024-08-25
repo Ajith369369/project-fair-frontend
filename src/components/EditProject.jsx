@@ -3,22 +3,22 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useContext, useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import { editResponseContext } from "../context/Contextshare";
 import { editUserProjectApi } from "../services/allApi";
 import { serverUrl } from "../services/serverUrl";
-import { editResponseContext } from "../context/Contextshare";
 
 function EditProject({ project }) {
   console.log("project: ", project);
 
   // EditProject.jsx is the child of MyProject.jsx which is changing the state, i.e., when EditProject.jsx edits the user project item in the list.
-  const {setEditResponse} = useContext(editResponseContext)
+  const { setEditResponse } = useContext(editResponseContext);
   const [projectDetails, setProjectDetails] = useState({
     title: project.title,
     language: project.language,
     github: project.github,
     website: project.website,
     overview: project.overview,
-    // projectImg: project.projectImage
+    // projectImg: project.projectImage - not used to prevent complications
     projectImg: "",
   });
 
@@ -28,11 +28,11 @@ function EditProject({ project }) {
 
   const handleClose1 = () => {
     setProjectDetails({
-      title: "",
-      language: "",
-      github: "",
-      website: "",
-      overview: "",
+      title: project.title,
+      language: project.language,
+      github: project.github,
+      website: project.website,
+      overview: project.overview,
       projectImg: "",
     });
     setPreview("");
@@ -61,13 +61,7 @@ function EditProject({ project }) {
       projectDetails;
     console.log("projectDetails: ", projectDetails);
     // if (!projectDetails.title ||!projectDetails.language ||!projectDetails.github ||!projectDetails.website ||!projectDetails.overview ||!projectDetails.projectImg)
-    if (
-      !title ||
-      !language ||
-      !github ||
-      !website ||
-      !overview
-    ) {
+    if (!title || !language || !github || !website || !overview) {
       alert("Please fill the form completely.");
     } else {
       // A FormData object is created, which is used to construct a set of key/value pairs representing form fields and their values. This is particularly useful for sending data that includes files (like images) via HTTP requests.
@@ -99,7 +93,7 @@ function EditProject({ project }) {
             // Bearer - No other certificate is required to verify this token.
             // iat : Time atwhich token is generated.
             "Content-Type": "multipart/form-data",
-            "Authorization": `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
           };
           const result = await editUserProjectApi(
             project._id,
@@ -113,7 +107,7 @@ function EditProject({ project }) {
           if (result.status == 200) {
             alert("Project updated successfully.");
             handleClose();
-            setEditResponse(result.data)
+            setEditResponse(result.data);
           } else {
             alert("Something went wrong.");
             handleClose();
@@ -139,7 +133,7 @@ function EditProject({ project }) {
           if (result.status == 200) {
             alert("Project updated successfully.");
             handleClose();
-            setEditResponse(result.data)
+            setEditResponse(result.data);
           } else {
             alert("Something went wrong.");
             handleClose();
