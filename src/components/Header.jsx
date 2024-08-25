@@ -11,9 +11,7 @@ function Header() {
     //Remove existing user details from session storage.
     sessionStorage.removeItem("existingUser");
     sessionStorage.removeItem("token");
-    
-    //contextapi
-    // setIsAuthorized(false);
+
     //navigate to home
     navigate("/");
   };
