@@ -3,8 +3,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 import Collapse from "react-bootstrap/Collapse";
 import proImg1 from "../assets/profile-image.png";
-import { serverUrl } from "../services/serverUrl";
 import { profileUpdateApi } from "../services/allApi";
+import { serverUrl } from "../services/serverUrl";
 
 function Profile() {
   const [open, setOpen] = useState(false);
@@ -22,13 +22,13 @@ function Profile() {
   const [existingImage, setExistingImage] = useState("");
 
   const [preview, setPreview] = useState("");
-  const [updateStatus, setUpdateStatus] = useState("")
+  const [updateStatus, setUpdateStatus] = useState({});
 
   const handleFile = (e) => {
     setUserDetails({ ...userDetails, profile: e.target.files[0] });
   };
-  
-  const handleUpdate = async() => {
+
+  const handleUpdate = async () => {
     const { username, email, password, github, linkedin, profile } =
       userDetails;
     if (!github || !linkedin) {
@@ -38,7 +38,7 @@ function Profile() {
       const reqBody = new FormData();
 
       // append() - add data to the object
-      // Each line appends a piece of data to the FormData object. This includes the form field names (title, language, etc.) and their corresponding values.
+      // Each line appends a piece of data to the FormData object. This includes the form field names (username, email, etc.) and their corresponding values.
       // The append() method adds key-value pairs to the FormData object, where the key is the form field name and the value is the content of the field.
       reqBody.append("username", username); // Postman Body > form-data
       reqBody.append("email", email); // Postman Body > form-data
@@ -61,20 +61,19 @@ function Profile() {
             // "Content-Type": "multipart/form-data" is used to send requests with uploaded content.
             // Select form-data in body section in Postman.
             // Bearer - No other certificate is required to verify this token.
-            // iat : Time atwhich token is generated.
+            // iat : Time at which token is generated.
             "Content-Type": "multipart/form-data",
-            "Authorization": `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
           };
-          const result = await profileUpdateApi(
-            reqBody,
-            reqHeader
-          );
+          const result = await profileUpdateApi(reqBody, reqHeader);
           console.log(
             "Result of the profileUpdateApi call to the console: ",
             result
           );
           if (result.status == 200) {
             alert("Project updated successfully.");
+            sessionStorage.setItem("existingUser", JSON.stringify(result.data));
+            setUpdateStatus(result.data)
             // handleClose();
           } else {
             alert("Something went wrong.");
@@ -89,16 +88,15 @@ function Profile() {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           };
-          const result = await profileUpdateApi(
-            reqBody,
-            reqHeader
-          );
+          const result = await profileUpdateApi(reqBody, reqHeader);
           console.log(
             "Result of the profileUpdateApi call to the console: ",
             result
           );
           if (result.status == 200) {
             alert("Profile updated successfully.");
+            sessionStorage.setItem("existingUser", JSON.stringify(result.data));
+            setUpdateStatus(result.data)
             // handleClose();
           } else {
             alert("Something went wrong.");
@@ -130,7 +128,7 @@ function Profile() {
       });
       setExistingImage(user.profile);
     }
-  }, []);
+  }, [updateStatus]);
 
   console.log("userDetails: ", userDetails);
   console.log("userDetails.profile: ", userDetails.profile);
