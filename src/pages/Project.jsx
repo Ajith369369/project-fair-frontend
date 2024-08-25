@@ -75,24 +75,20 @@ function Project() {
             </div>
           </div>
         ) : (
-          {
-            /* No projects when the user is not logged in. */
-          }(
-            <div className="row mt-5 w-100">
-              <div className="col-md-4"></div>
-              <div className="col-md-4 p-4 d-flex flex-column justify-content-center align-items-center">
-                <img src={loginImage} alt="" width={"70%"} height={"300px"} />
-                <h4 className="mt-5 text-center">
-                  Please{" "}
-                  <Link to={"/login"} className="text-danger">
-                    Login
-                  </Link>{" "}
-                  to Explore More Projects
-                </h4>
-              </div>
-              <div className="col-md-4"></div>
+          <div className="row mt-5 w-100">
+            <div className="col-md-4"></div>
+            <div className="col-md-4 p-4 d-flex flex-column justify-content-center align-items-center">
+              <img src={loginImage} alt="" width={"70%"} height={"300px"} />
+              <h4 className="mt-5 text-center">
+                Please{" "}
+                <Link to={"/login"} className="text-danger">
+                  Login
+                </Link>{" "}
+                to Explore More Projects
+              </h4>
             </div>
-          )
+            <div className="col-md-4"></div>
+          </div>
         )}
       </div>
       <Footer />
