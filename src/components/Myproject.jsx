@@ -61,7 +61,7 @@ function Myproject() {
         {userProject?.length > 0 ? (
           userProject?.map((item) => (
             <div
-              key={item.id}
+              key={item._id}
               className="p-3 mt-4 rounded-2 d-flex"
               style={{ backgroundColor: "lightgray" }}
             >
@@ -89,7 +89,7 @@ function Myproject() {
             </div>
           ))
         ) : (
-          <p className="text-danger">No project added yet</p>
+          <p className="text-danger">No projects added yet</p>
         )}
       </div>
     </>
