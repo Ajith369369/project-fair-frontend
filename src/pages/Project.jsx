@@ -6,6 +6,7 @@ import loginImage from "../assets/login.gif";
 import Header from "../components/Header";
 import ProjectCard from "../components/ProjectCard";
 import { allProjectApi } from "../services/allApi";
+import Footer from "../components/Footer";
 
 function Project() {
   const [isToken, setIsToken] = useState("");
@@ -90,6 +91,7 @@ function Project() {
           </div>
         )}
       </div>
+      <Footer/>
     </>
   );
 }

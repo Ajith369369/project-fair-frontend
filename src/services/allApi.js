@@ -53,7 +53,7 @@ export const removeUserProjectApi = async (id) => {
   );
 };
 
-// edit project
+// edit user project
 export const editUserProjectApi = async (id, reqBody, reqHeader) => {
   return await commonApi(
     "PUT",

@@ -56,6 +56,12 @@ function EditProject({ project }) {
   };
   console.log("projectDetails: ", projectDetails);
 
+  useEffect(() => {
+    if (projectDetails.projectImg) {
+      setPreview(URL.createObjectURL(projectDetails.projectImg));
+    }
+  }, [projectDetails.projectImg]);
+
   const handleEdit = async () => {
     const { title, language, github, website, overview, projectImg } =
       projectDetails;
@@ -143,11 +149,6 @@ function EditProject({ project }) {
     }
   };
 
-  useEffect(() => {
-    if (projectDetails.projectImg) {
-      setPreview(URL.createObjectURL(projectDetails.projectImg));
-    }
-  }, [projectDetails.projectImg]);
   return (
     <>
       <FontAwesomeIcon
