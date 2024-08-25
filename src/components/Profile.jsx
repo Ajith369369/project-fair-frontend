@@ -71,7 +71,7 @@ function Profile() {
             result
           );
           if (result.status == 200) {
-            alert("Project updated successfully.");
+            alert("Profile updated successfully.");
             sessionStorage.setItem("existingUser", JSON.stringify(result.data));
             setUpdateStatus(result.data)
             // handleClose();
@@ -94,7 +94,7 @@ function Profile() {
             result
           );
           if (result.status == 200) {
-            alert("Profile updated successfully.");
+            alert("Profile updated successfully (Without uploaded image).");
             sessionStorage.setItem("existingUser", JSON.stringify(result.data));
             setUpdateStatus(result.data)
             // handleClose();
@@ -172,6 +172,7 @@ function Profile() {
                     alt=""
                     width={"180px"}
                     height={"180px"}
+                    style={{borderRadius:'50%'}}
                   />
                 ) : (
                   <img
@@ -183,6 +184,7 @@ function Profile() {
                     alt=""
                     width={"180px"}
                     height={"180px"}
+                    style={{borderRadius:'50%'}}
                   />
                 )}
               </label>

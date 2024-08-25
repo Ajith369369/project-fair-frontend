@@ -65,6 +65,7 @@ export const editUserProjectApi = async (id, reqBody, reqHeader) => {
 
 // update profile
 export const profileUpdateApi = async (reqBody, reqHeader) => {
+  console.log('Inside profileUpdateApi.')
   return await commonApi(
     "PUT",
     `${serverUrl}/update-profile`,
