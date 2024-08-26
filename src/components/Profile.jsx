@@ -2,6 +2,8 @@ import { faAngleDown, faAngleUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 import Collapse from "react-bootstrap/Collapse";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import proImg1 from "../assets/profile-image.png";
 import { profileUpdateApi } from "../services/allApi";
 import { serverUrl } from "../services/serverUrl";
@@ -32,7 +34,7 @@ function Profile() {
     const { username, email, password, github, linkedin, profile } =
       userDetails;
     if (!github || !linkedin) {
-      alert("Please fill the form completely.");
+      toast.info("Please fill the form completely.");
     } else {
       // A FormData object is created, which is used to construct a set of key/value pairs representing form fields and their values. This is particularly useful for sending data that includes files (like images) via HTTP requests.
       const reqBody = new FormData();
@@ -71,12 +73,12 @@ function Profile() {
             result
           );
           if (result.status == 200) {
-            alert("Profile updated successfully.");
+            toast.success("Profile updated successfully.");
             sessionStorage.setItem("existingUser", JSON.stringify(result.data));
-            setUpdateStatus(result.data)
+            setUpdateStatus(result.data);
             // handleClose();
           } else {
-            alert("Something went wrong.");
+            toast.error("Something went wrong.");
             // handleClose();
           }
         } else {
@@ -94,12 +96,14 @@ function Profile() {
             result
           );
           if (result.status == 200) {
-            alert("Profile updated successfully (Without uploaded image).");
+            toast.success(
+              "Profile updated successfully (Without uploaded image)."
+            );
             sessionStorage.setItem("existingUser", JSON.stringify(result.data));
-            setUpdateStatus(result.data)
+            setUpdateStatus(result.data);
             // handleClose();
           } else {
-            alert("Something went wrong.");
+            toast.error("Something went wrong.");
             // handleClose();
           }
         }
@@ -172,7 +176,7 @@ function Profile() {
                     alt=""
                     width={"180px"}
                     height={"180px"}
-                    style={{borderRadius:'50%'}}
+                    style={{ borderRadius: "50%" }}
                   />
                 ) : (
                   <img
@@ -184,7 +188,7 @@ function Profile() {
                     alt=""
                     width={"180px"}
                     height={"180px"}
-                    style={{borderRadius:'50%'}}
+                    style={{ borderRadius: "50%" }}
                   />
                 )}
               </label>
@@ -219,6 +223,7 @@ function Profile() {
           </div>
         </Collapse>
       </div>
+      <ToastContainer theme="colored" position="top-center" autoClose={2000} />
     </>
   );
 }
