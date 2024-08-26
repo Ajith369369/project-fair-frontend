@@ -3,6 +3,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useContext, useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { editResponseContext } from "../context/Contextshare";
 import { editUserProjectApi } from "../services/allApi";
 import { serverUrl } from "../services/serverUrl";
@@ -68,7 +70,7 @@ function EditProject({ project }) {
     console.log("projectDetails: ", projectDetails);
     // if (!projectDetails.title ||!projectDetails.language ||!projectDetails.github ||!projectDetails.website ||!projectDetails.overview ||!projectDetails.projectImg)
     if (!title || !language || !github || !website || !overview) {
-      alert("Please fill the form completely.");
+      toast.info("Please fill the form completely.");
     } else {
       // A FormData object is created, which is used to construct a set of key/value pairs representing form fields and their values. This is particularly useful for sending data that includes files (like images) via HTTP requests.
       const reqBody = new FormData();
@@ -111,11 +113,11 @@ function EditProject({ project }) {
             result
           );
           if (result.status == 200) {
-            alert("Project updated successfully.");
+            toast.success("Project updated successfully.");
             handleClose();
             setEditResponse(result.data);
           } else {
-            alert("Something went wrong.");
+            toast.error("Something went wrong.");
             handleClose();
           }
         } else {
@@ -137,11 +139,11 @@ function EditProject({ project }) {
             result
           );
           if (result.status == 200) {
-            alert("Project updated successfully.");
+            toast.success("Project updated successfully.");
             handleClose();
             setEditResponse(result.data);
           } else {
-            alert("Something went wrong.");
+            toast.error("Something went wrong.");
             handleClose();
           }
         }
@@ -265,6 +267,7 @@ function EditProject({ project }) {
           </Button>
         </Modal.Footer>
       </Modal>
+      <ToastContainer theme="colored" position="top-center" autoClose={2000} />
     </>
   );
 }
