@@ -1,11 +1,13 @@
 import { faStackOverflow } from "@fortawesome/free-brands-svg-icons";
 import { faPowerOff } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useEffect, useState } from "react";
 import { Container, Navbar } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 
 function Header() {
   const navigate = useNavigate();
+  const [token, setToken] = useState("");
 
   const handleLogout = () => {
     //Remove existing user details from session storage.
@@ -15,7 +17,11 @@ function Header() {
     //navigate to home
     navigate("/");
   };
-
+  useEffect(() => {
+    if (sessionStorage.getItem("token")) {
+      setToken(sessionStorage.getItem("token"));
+    }
+  }, []);
   return (
     <>
       <Navbar className="bg-success">
@@ -32,10 +38,15 @@ function Header() {
               </h4>
             </Link>
           </Navbar.Brand>
-          <button onClick={handleLogout} className="btn btn-warning rounded-0">
-            <FontAwesomeIcon icon={faPowerOff} className="me-2" />
-            Logout
-          </button>
+          {token && (
+            <button
+              onClick={handleLogout}
+              className="btn btn-warning rounded-0"
+            >
+              <FontAwesomeIcon icon={faPowerOff} className="me-2" />
+              Logout
+            </button>
+          )}
         </Container>
       </Navbar>
     </>
