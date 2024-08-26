@@ -44,7 +44,7 @@ function Header() {
               className="btn btn-warning rounded-0"
             >
               <FontAwesomeIcon icon={faPowerOff} className="me-2" />
-              Logout
+              Log Out
             </button>
           )}
         </Container>
