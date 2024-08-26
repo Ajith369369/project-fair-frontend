@@ -15,7 +15,7 @@ function Project() {
 
   const getAllProject = async (searchKey) => {
     const result = await allProjectApi(searchKey);
-    await setAllProject(result.data);
+    setAllProject(result.data);
   };
 
   console.log("allProject: ", allProject);
@@ -28,7 +28,6 @@ function Project() {
     if (sessionStorage.getItem("token")) {
       setIsToken(sessionStorage.getItem("token"));
     }
-    getAllProject();
   }, []);
 
   return (
