@@ -3,6 +3,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { addResponseContext } from "../context/Contextshare";
 import { addProjectApi } from "../services/allApi";
+import { ToastContainer, toast } from 'react-toastify'; import 'react-toastify/dist/ReactToastify.css';
 
 function AddProject() {
   const [show, setShow] = useState(false);
@@ -71,7 +72,7 @@ function AddProject() {
     const { title, language, github, website, overview, projectImg } =
       projectDetails;
 
-    // if statement checks if any of the required fields (title, language, github, website, overview, projectImg) are empty. If any field is missing, it triggers an alert to inform the user to complete the form.
+    // if statement checks if any of the required fields (title, language, github, website, overview, projectImg) are empty. If any field is missing, it triggers an toast to inform the user to complete the form.
     if (
       !title ||
       !language ||
@@ -80,7 +81,7 @@ function AddProject() {
       !overview ||
       !projectImg
     ) {
-      alert("Please fill the form completely.");
+      toast.info("Please fill the form completely.");
     } else {
       // A FormData object is created, which is used to construct a set of key/value pairs representing form fields and their values. This is particularly useful for sending data that includes files (like images) via HTTP requests.
       const reqBody = new FormData();
@@ -121,10 +122,10 @@ function AddProject() {
 
         if (result.status == 200) {
           setAddResponse(result.data);
-          alert("Project added successfully.");
+          toast.success("Project added successfully.");
           handleClose();
         } else {
-          alert("Something went wrong.");
+          toast.error("Something went wrong.");
           handleClose();
         }
       }
@@ -291,6 +292,7 @@ function AddProject() {
           </Button>
         </Modal.Footer>
       </Modal>
+      <ToastContainer theme="colored" position="top-center" autoClose={2000} />
     </>
   );
 }
