@@ -18,7 +18,7 @@ function Project() {
     await setAllProject(result.data);
   };
 
-  console.log('allProject: ', allProject)
+  console.log("allProject: ", allProject);
 
   useEffect(() => {
     getAllProject(searchKey);
@@ -76,6 +76,7 @@ function Project() {
           </div>
         ) : (
           <div className="row mt-5 w-100">
+            {/* All projects when the user is not logged in. */}
             <div className="col-md-4"></div>
             <div className="col-md-4 p-4 d-flex flex-column justify-content-center align-items-center">
               <img src={loginImage} alt="" width={"70%"} height={"300px"} />
