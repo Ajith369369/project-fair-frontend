@@ -1,16 +1,18 @@
 import { faStackOverflow } from "@fortawesome/free-brands-svg-icons";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import loginImage from "../assets/login.gif";
+import { isLoginAuthContext } from "../context/Contextshare";
 import { loginApi, registerApi } from "../services/allApi";
 
 function Auth({ register }) {
   const navigate = useNavigate();
+  const { setIsLoginStatus } = useContext(isLoginAuthContext);
 
   const [userDetails, setUserDetails] = useState({
     username: "",
@@ -65,6 +67,7 @@ function Auth({ register }) {
 
         // token was already a string whn received.
         sessionStorage.setItem("token", result.data.token);
+        setIsLoginStatus(true);
         navigate("/");
       } else {
         toast.error("Something went wrong.");
