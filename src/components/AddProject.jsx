@@ -1,9 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { addResponseContext } from "../context/Contextshare";
 import { addProjectApi } from "../services/allApi";
-import { ToastContainer, toast } from 'react-toastify'; import 'react-toastify/dist/ReactToastify.css';
 
 function AddProject() {
   const [show, setShow] = useState(false);
