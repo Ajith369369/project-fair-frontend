@@ -3,13 +3,13 @@ import React, { createContext, useState } from "react";
 // Create context component
 export const addResponseContext = createContext({});
 export const editResponseContext = createContext({});
-export const isLoginAuthContext = createContext({});
+export const isLoginAuthContext = createContext(true);
 
 function Contextshare({ children }) {
   // Response to be shared
   const [addResponse, setAddResponse] = useState({});
   const [editResponse, setEditResponse] = useState({});
-  const [isLoginStatus, setIsLoginStatus] = useState(false);
+  const [isLoginStatus, setIsLoginStatus] = useState(true);
 
   return (
     // Wrapping with the created context component
